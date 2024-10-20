@@ -1,0 +1,80 @@
+
+<div class="card">
+    <div class="card-header bg-success text-white">
+        Transaction List
+    </div>
+    <div class="card-body">
+
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-3">
+                    <input type="text" class="form-control" [(ngModel)]="filterObj.customerId" placeholder="Search by Customer ID">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" [(ngModel)]="filterObj.accountNumber" placeholder="Search by Account Number">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" [(ngModel)]="filterObj.description" placeholder="Search by description">
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-success" (click)="filterTransactions()">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-2">
+                    <div class="database_length">
+                        <label>Show
+                            <select [(ngModel)]="filterObj.size" (change)="filterTransactions()">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> Entries
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-10 d-flex justify-content-end">
+                    <div class="pagination">
+                        <div class="btn-group" id="radioBtn">
+                            <a class="btn btn-primary btn-sm" (click)="onPrevious()">Previous</a>
+                            <a class="btn btn-primary btn-sm active">{{ filterObj.page }}</a>
+                            <a class="btn btn-primary btn-sm" (click)="onNext()">Next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer ID</th>
+                    <th>Account Number</th>
+                    <th>Description</th>
+                    <th>Transaction Amount</th>
+                    <th>Transaction Date</th>
+                    <th>Transaction Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of transactions">
+                    <td>{{item.id}}</td>
+                    <td>{{item.customerId}}</td>
+                    <td>{{item.accountNumber}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.trxAmount}}</td>
+                    <td>{{item.trxDate}}</td>
+                    <td>{{item.trxTime}}</td>
+                    <td><button [routerLink]="['/dashboard/update', item.id]" class="btn btn-info">Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

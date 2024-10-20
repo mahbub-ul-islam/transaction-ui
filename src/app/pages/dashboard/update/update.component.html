@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 35rem;">
+        <div class="card-body">
+            <h1 class="card-title mb-5">Update Transaction</h1>
+            <form [formGroup]="form" (submit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="customerId" class="form-label">Customer Id</label>
+                    <input type="text" class="form-control" formControlName="customerId" id="customerId">
+                    <div *ngIf="form.controls['customerId'].invalid && form.controls['customerId'].touched" class="text-danger">
+                        This field cannot be empty.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="accountNumber" class="form-label">Account Number</label>
+                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber">
+                    <div *ngIf="form.controls['accountNumber'].invalid && form.controls['accountNumber'].touched" class="text-danger">
+                        This field cannot be empty.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" formControlName="description" id="description">
+                    <div *ngIf="form.controls['description'].invalid && form.controls['description'].touched" class="text-danger">
+                        This field cannot be empty.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="trxAmount" class="form-label">Transaction Amount</label>
+                    <input type="number" class="form-control" formControlName="trxAmount" id="trxAmount">
+                    <div *ngIf="form.controls['trxAmount'].invalid && form.controls['trxAmount'].touched" class="text-danger">
+                        Transaction Amount must be a valid number.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="trxDate" class="form-label">Transaction Date</label>
+                    <input type="text" class="form-control" formControlName="trxDate" id="trxDate">
+                    <div *ngIf="form.controls['trxDate'].invalid && form.controls['trxDate'].touched" class="text-danger">
+                        This field cannot be empty.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="trxTime" class="form-label">Transaction Time</label>
+                    <input type="text" class="form-control" formControlName="trxTime" id="trxTime">
+                    <div *ngIf="form.controls['trxTime'].invalid && form.controls['trxTime'].touched" class="text-danger">
+                        This field cannot be empty.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success form-control mt-3" [disabled]="form.invalid">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

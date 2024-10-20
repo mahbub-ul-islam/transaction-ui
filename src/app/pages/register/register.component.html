@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 35rem;">
+        <div class="card-body">
+            <h1 class="card-title mb-5">Register</h1>
+            <form [formGroup]="form" (submit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" formControlName="username" id="username" placeholder="Username">
+                    <!-- Error message for username -->
+                    <div *ngIf="form.get('username')?.touched && form.get('username')?.invalid" class="text-danger">
+                        <small *ngIf="form.get('username')?.errors?.['required']">Username cannot be empty.</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="First Name">
+                    <!-- Error message for firstName -->
+                    <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="text-danger">
+                        <small *ngIf="form.get('firstName')?.errors?.['required']">First Name cannot be empty.</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Last Name">
+                    <!-- Error message for lastName -->
+                    <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="text-danger">
+                        <small *ngIf="form.get('lastName')?.errors?.['required']">Last Name cannot be empty.</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" formControlName="email" id="email" placeholder="name@example.com">
+                    <!-- Error message for email -->
+                    <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
+                        <small *ngIf="form.get('email')?.errors?.['required']">Email cannot be empty.</small>
+                        <small *ngIf="form.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password">
+                    <!-- Error message for password -->
+                    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="text-danger">
+                        <small *ngIf="form.get('password')?.errors?.['required']">Password cannot be empty.</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success form-control mt-3" [disabled]="form.invalid">Register</button>
+            </form>
+
+            <!-- Display error message if it exists -->
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                {{ errorMessage }}
+            </div>
+
+            <!-- Display success message if it exists -->
+            <div *ngIf="successMessage" class="alert alert-success mt-3">
+                {{ successMessage }}
+            </div>
+        </div>
+    </div>
+</div>

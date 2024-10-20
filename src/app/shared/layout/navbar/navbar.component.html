@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+
+                <!-- Show Dashboard and Batch links only if the user is logged in -->
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link active" aria-current="page" routerLink="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/dashboard/batch">Batch</a>
+                </li>
+
+                <!-- Show Register and Login links only if the user is NOT logged in -->
+                <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/register">Register</a>
+                </li>
+                <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                    <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+
+                <!-- Show Logout button only if the user is logged in -->
+                <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                    <a class="nav-link" href="#" (click)="onLogout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
