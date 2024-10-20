@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ApiUrlService} from '../../../core/services/api-url.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class UpdateComponent implements OnInit{
 
     form: FormGroup;
     id: number | undefined;
+    errorMessage: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -65,11 +66,15 @@ export class UpdateComponent implements OnInit{
             this.http.put(apiUrl, this.form.value).subscribe(
                 response => {
                     console.log('Transaction updated successfully', response);
-
-                    // Redirect to the list page after successful update
+                    this.errorMessage = null;
                     this.router.navigate(['/dashboard/list']);
                 },
-                error => {
+                (error: HttpErrorResponse) => {
+                    if (error.error && error.error.message && error.error.status) {
+                        this.errorMessage = error.error.message;
+                    } else {
+                        this.errorMessage = 'An unexpected error occurred. Please try again later.';
+                    }
                     console.error('Error updating transaction', error);
                 }
             )
